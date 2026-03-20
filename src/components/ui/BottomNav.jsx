@@ -10,9 +10,8 @@ export default function BottomNav() {
 
   const items = [
     { icon: Home, label: 'Home', to: '/dashboard' },
-    { icon: Search, label: 'Search', to: '/dashboard' },
     { icon: null, label: 'Create', to: '/create' }, // center fab
-    { icon: Bell, label: 'Alerts', to: '/dashboard' },
+    { icon: Bell, label: 'Alerts', to: '/alerts' },
     { icon: User, label: 'Profile', to: '/profile' },
   ];
 

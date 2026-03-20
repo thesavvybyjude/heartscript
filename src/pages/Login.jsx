@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Heart, Mail, Lock, User, Chrome, Apple } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -16,7 +16,17 @@ export default function Login() {
   const [, setError] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
   const login = useStore(s => s.login);
+
+  const searchParams = new URLSearchParams(location.search);
+  const returnUrl = searchParams.get('returnUrl');
+
+  useState(() => {
+    if (returnUrl) {
+      setIsSignUp(true);
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +57,7 @@ export default function Login() {
           username: isSignUp ? username.trim() : null,
         });
         toast.success(isSignUp ? 'Account created' : 'Welcome back');
-        navigate('/dashboard');
+        navigate(returnUrl || '/dashboard');
       } catch (err) {
         toast.error(err.message || 'Authentication failed');
       } finally {

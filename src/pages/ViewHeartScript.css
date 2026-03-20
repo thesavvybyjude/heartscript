@@ -174,14 +174,16 @@
   min-height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 32px;
+  padding: 60px 24px 24px;
 }
 
 .view-reveal-content {
   max-width: 400px;
   width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -251,18 +253,7 @@
   opacity: 1;
 }
 
-.view-send-own {
-  padding: 16px 28px;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 20px;
-}
+/* Removed .view-send-own in favor of inline styles as requested */
 
 /* ===== THANK YOU ===== */
 .view-thankyou {
@@ -271,7 +262,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 32px;
+  padding: 80px 32px 32px;
   text-align: center;
   background: var(--warm-ivory);
 }

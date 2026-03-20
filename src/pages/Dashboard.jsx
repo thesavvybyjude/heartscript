@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Clock, Lock, ChevronRight, MessageSquare, FileText, Heart, Trash2 } from 'lucide-react';
+import { Clock, Lock, ChevronRight, MessageSquare, FileText, Heart, Trash2, Search as SearchIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import useStore from '../store/useStore';
 import { supabase } from '../lib/supabase';
@@ -18,6 +16,22 @@ export default function Dashboard() {
   const revokeHeartScript = useStore(s => s.revokeHeartScript);
   const isLoading = useStore(s => s.isLoading);
   const avatar = getAvatar(user?.avatarId || 1);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+  // Show search if more than 5 items
+  useEffect(() => {
+    if (heartscripts.length > 5) {
+      setIsSearchVisible(true);
+    }
+  }, [heartscripts.length]);
+
+  const filteredScripts = heartscripts.filter(h => 
+    h.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    h.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    h.tone.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     fetchDashboardScripts();
@@ -64,9 +78,25 @@ export default function Dashboard() {
 
       {/* Section label */}
       <div className="dash-section-header">
-        <span className="text-label">Your HeartScripts</span>
-        <span className="text-label">{heartscripts.length}</span>
+        <span className="text-label">
+          {searchQuery ? 'Search results' : (isSearchVisible ? 'Search your HeartScripts' : 'Your HeartScripts')}
+        </span>
+        <span className="text-label">{filteredScripts.length}</span>
       </div>
+
+      {/* Search Bar */}
+      {isSearchVisible && (
+        <div className="dash-search">
+          <SearchIcon size={18} className="dash-search-icon" />
+          <input 
+            type="text" 
+            placeholder="Search by message, sender or tone..."
+            className="dash-search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      )}
 
       {/* Content */}
       <main className="dash-content">
@@ -96,7 +126,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="dash-list">
-            {heartscripts.map((h, index) => (
+            {filteredScripts.map((h, index) => (
               <motion.div
                 key={h.id}
                 initial={{ opacity: 0, y: 20 }}

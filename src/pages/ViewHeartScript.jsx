@@ -16,6 +16,9 @@ export default function ViewHeartScript() {
   const addResponse = useStore(s => s.addResponse);
   const updateOpenedAt = useStore(s => s.updateOpenedAt);
 
+  const user = useStore(s => s.user);
+  const isInitializing = useStore(s => s.isInitializing);
+
   const [heartscript, setHeartscript] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
   const [decryptedContent, setDecryptedContent] = useState('');
@@ -24,6 +27,13 @@ export default function ViewHeartScript() {
   const [viewState, setViewState] = useState('landing'); // landing | unlock | reveal | thankyou
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  // 1. Enforce authentication on shared links
+  useEffect(() => {
+    if (!isInitializing && !user) {
+      navigate(`/login?returnUrl=/view/${id}`);
+    }
+  }, [user, isInitializing, navigate, id]);
 
   useEffect(() => {
     if (viewState === 'reveal' && soundscape !== 'none') {
@@ -41,13 +51,16 @@ export default function ViewHeartScript() {
     load();
   }, [id, fetchHeartScript]);
 
-  if (isFetching) {
+  if (isInitializing || (isFetching && user)) {
     return (
       <div className="view-page flex-center" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Heart size={40} className="skeleton-shimmer" stroke="var(--soft-coral)" style={{ animation: 'heart-pulse 1.5s infinite' }} />
       </div>
     );
   }
+
+  // If not logged in, we are redirecting in the useEffect, render nothing
+  if (!user) return null;
 
   if (!heartscript) {
     return (
@@ -250,9 +263,13 @@ export default function ViewHeartScript() {
 
               {heartscript.type === 'custom' && (
                 <button
-                  className="view-send-own"
-                  style={{ color: tone.textColor }}
-                  onClick={() => navigate('/create')}
+                  style={{
+                    background: 'none', border: 'none', padding: 0,
+                    fontWeight: 800, textDecoration: 'underline',
+                    color: tone.textColor, marginTop: '32px', fontSize: '1.1rem',
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => navigate('/login')}
                 >
                   Send your own HeartScript
                 </button>
@@ -277,8 +294,16 @@ export default function ViewHeartScript() {
             <h1 className="view-thankyou-title">Awesome! You've<br />responded.</h1>
             <p className="text-muted text-sm">Your response has been sent<br />successfully to the sender.</p>
 
-            <button className="btn-primary" style={{ marginTop: 32 }} onClick={() => navigate('/create')}>
-              Send your own HeartScript
+            <button 
+              style={{
+                background: 'none', border: 'none', padding: 0,
+                fontWeight: 900, textDecoration: 'underline',
+                color: 'var(--rose-red)', marginTop: 'auto', marginBottom: '24px', fontSize: '1.2rem',
+                cursor: 'pointer', fontFamily: 'var(--font-body)'
+              }}
+              onClick={() => navigate('/login')}
+            >
+              SEND YOUR OWN HEARTSCRIPT
             </button>
           </motion.div>
         )}

@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Wizard from './pages/Wizard';
 import Profile from './pages/Profile';
 import ViewHeartScript from './pages/ViewHeartScript';
+import Alerts from './pages/Alerts';
 
 function App() {
   const initializeAuth = useStore(s => s.initializeAuth);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/create" element={<Wizard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/view/:id" element={<ViewHeartScript />} />
+          <Route path="/alerts" element={<Alerts />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
