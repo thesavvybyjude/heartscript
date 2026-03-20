@@ -107,7 +107,7 @@ export default function ViewHeartScript() {
       setViewState('reveal');
       setError('');
       updateOpenedAt(heartscript.id);
-    } catch (err) {
+    } catch {
       setError('Incorrect password. Try again.');
     }
   };

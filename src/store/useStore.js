@@ -111,7 +111,7 @@ const useStore = create((set, get) => {
 
     fetchHeartScript: async (id) => {
       set({ isLoading: true });
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('heartscripts')
         .select('*')
         .eq('id', id)

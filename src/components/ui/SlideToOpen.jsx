@@ -26,7 +26,7 @@ export default function SlideToOpen({ onComplete }) {
       
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.3);
-    } catch (e) {
+    } catch {
       // AudioContext might be blocked or unsupported
     }
   };

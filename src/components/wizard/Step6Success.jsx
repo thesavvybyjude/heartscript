@@ -8,6 +8,7 @@ import './WizardSteps.css';
 export default function Step6Success() {
   const navigate = useNavigate();
   const createdId = useStore(s => s.wizardCreatedId);
+  const resetWizard = useStore(s => s.resetWizard);
   const [copied, setCopied] = useState(false);
 
   const shareUrl = createdId
