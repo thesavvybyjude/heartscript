@@ -1,5 +1,6 @@
 import { Clock, Lock, ChevronRight, MessageSquare, FileText, Heart, Trash2, Search as SearchIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useStore from '../store/useStore';
 import { supabase } from '../lib/supabase';
@@ -18,14 +19,9 @@ export default function Dashboard() {
   const avatar = getAvatar(user?.avatarId || 1);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
-
+  
   // Show search if more than 5 items
-  useEffect(() => {
-    if (heartscripts.length > 5) {
-      setIsSearchVisible(true);
-    }
-  }, [heartscripts.length]);
+  const isSearchVisible = heartscripts.length > 5;
 
   const filteredScripts = heartscripts.filter(h => 
     h.content.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -28,6 +28,37 @@ export default function ViewHeartScript() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const requestFullScreen = () => {
+    try {
+      if (document.fullscreenElement) return; // already in fullscreen
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen().catch(err => console.warn("Fullscreen request denied", err));
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    } catch (err) {
+      console.warn("Fullscreen failed", err);
+    }
+  };
+
+  const exitFullScreen = () => {
+    try {
+      if (!document.fullscreenElement) return; // not in fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    } catch (err) {
+      console.warn("Exit Fullscreen failed", err);
+    }
+  };
+
   // 1. Enforce authentication on shared links
   useEffect(() => {
     if (!isInitializing && !user) {
@@ -38,7 +69,14 @@ export default function ViewHeartScript() {
   useEffect(() => {
     if (viewState === 'reveal' && soundscape !== 'none') {
       const cleanup = playSoundscape(soundscape);
-      return () => { if (cleanup) cleanup(); };
+      return () => { 
+        if (cleanup) cleanup(); 
+        exitFullScreen();
+      };
+    }
+    // Also exit if we leave reveal some other way
+    if (viewState !== 'reveal' && document.fullscreenElement) {
+       exitFullScreen();
     }
   }, [viewState, soundscape]);
 
@@ -76,31 +114,16 @@ export default function ViewHeartScript() {
     );
   }
 
-  const tone = getTone(heartscript.tone);
-
-  const requestFullScreen = () => {
-    try {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen().catch(err => console.warn("Fullscreen request denied", err));
-      } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-      }
-    } catch (err) {
-      console.warn("Fullscreen failed", err);
-    }
-  };
+  const tone = getTone(heartscript?.tone || 'romantic');
 
   const handleOpen = () => {
-    requestFullScreen();
     if (heartscript.is_locked) {
       setViewState('unlock');
     } else {
       const parts = heartscript.content.split('|||');
       setDecryptedContent(parts[0]);
       setSoundscape(parts[1] || 'none');
+      requestFullScreen();
       setViewState('reveal');
       updateOpenedAt(heartscript.id);
     }
@@ -127,7 +150,10 @@ export default function ViewHeartScript() {
 
   const handleResponse = (response) => {
     addResponse(heartscript.id, response);
-    setTimeout(() => setViewState('thankyou'), 600);
+    setTimeout(() => {
+      exitFullScreen();
+      setViewState('thankyou');
+    }, 600);
   };
 
   return (
@@ -269,7 +295,7 @@ export default function ViewHeartScript() {
                     color: tone.textColor, marginTop: '32px', fontSize: '1.1rem',
                     cursor: 'pointer'
                   }}
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/login?mode=signup')}
                 >
                   Send your own HeartScript
                 </button>
@@ -301,7 +327,7 @@ export default function ViewHeartScript() {
                 color: 'var(--rose-red)', marginTop: 'auto', marginBottom: '24px', fontSize: '1.2rem',
                 cursor: 'pointer', fontFamily: 'var(--font-body)'
               }}
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/login?mode=signup')}
             >
               SEND YOUR OWN HEARTSCRIPT
             </button>

@@ -21,9 +21,10 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
   const returnUrl = searchParams.get('returnUrl');
+  const mode = searchParams.get('mode');
 
   useState(() => {
-    if (returnUrl) {
+    if (returnUrl || mode === 'signup') {
       setIsSignUp(true);
     }
   });
