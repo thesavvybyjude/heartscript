@@ -1,0 +1,198 @@
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--warm-ivory);
+  padding-bottom: 100px;
+}
+
+/* Header */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 48px 24px 24px;
+}
+
+.dash-greeting {
+  font-size: 0.85rem;
+  color: rgba(31,35,51,0.4);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.dash-username {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  line-height: 1.1;
+}
+
+.dash-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dash-avatar:hover {
+  transform: scale(1.05);
+}
+
+.dash-avatar-emoji {
+  font-size: 1.6rem;
+}
+
+/* Section header */
+.dash-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+
+/* Content */
+.dash-content {
+  padding: 0 24px;
+}
+
+/* Empty */
+.dash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.dash-empty-icon {
+  width: 96px;
+  height: 96px;
+  background: rgba(var(--rose-red-rgb), 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.dash-empty-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.dash-empty-desc {
+  font-size: 0.9rem;
+  color: rgba(31,35,51,0.4);
+  font-style: italic;
+}
+
+/* Card list */
+.dash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.dash-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-card-icon[data-type="pop_question"] {
+  background: rgba(var(--rose-red-rgb), 0.08);
+  color: var(--rose-red);
+}
+
+.dash-card-icon[data-type="custom"] {
+  background: rgba(31,35,51,0.05);
+  color: rgba(31,35,51,0.4);
+}
+
+.dash-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.dash-card-tone {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--midnight-navy);
+}
+
+.dash-card-content {
+  font-size: 0.88rem;
+  color: rgba(31,35,51,0.6);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.dash-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dash-card-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: rgba(31,35,51,0.25);
+}
+
+.dash-card-locked {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: rgba(var(--rose-red-rgb), 0.35);
+}
+
+.dash-card-arrow {
+  color: rgba(31,35,51,0.1);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.dash-card:hover .dash-card-arrow {
+  color: var(--rose-red);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--positive-green);
+  border-radius: 50%;
+  animation: heart-pulse 2s infinite;
+}

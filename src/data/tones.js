@@ -1,0 +1,58 @@
+export const TONES = [
+  {
+    id: 'romantic',
+    name: 'Romantic',
+    emoji: '🌹',
+    example: '"You make my heart skip a beat..."',
+    background: 'linear-gradient(135deg, #FF6B6B, #FF8E8E, #FFB3B3)',
+    textColor: '#FFFFFF',
+    fontClass: 'font-handwriting',
+  },
+  {
+    id: 'coded',
+    name: 'Coded',
+    emoji: '💻',
+    example: '"if (you.happy) { me.happy = true; }"',
+    background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)',
+    textColor: '#00FF88',
+    fontClass: '',
+  },
+  {
+    id: 'movie_buff',
+    name: 'Movie Buff',
+    emoji: '🎬',
+    example: '"Here\'s looking at you, kid."',
+    background: 'linear-gradient(135deg, #2c3e50, #4a5568, #1a202c)',
+    textColor: '#F7FAFC',
+    fontClass: 'font-display',
+  },
+  {
+    id: 'heartfelt',
+    name: 'Heartfelt',
+    emoji: '💝',
+    example: '"You mean the world to me..."',
+    background: 'linear-gradient(135deg, #FFF5F5, #FED7D7, #FEB2B2)',
+    textColor: '#9B2C2C',
+    fontClass: 'font-handwriting',
+  },
+  {
+    id: 'humourous',
+    name: 'Humourous',
+    emoji: '😂',
+    example: '"Are you WiFi? Because I\'m feeling a connection."',
+    background: 'linear-gradient(135deg, #FEFCBF, #FEF08A, #FDE68A)',
+    textColor: '#744210',
+    fontClass: '',
+  },
+  {
+    id: 'poetic',
+    name: 'Poetic',
+    emoji: '🌸',
+    example: '"In gardens of the heart, you bloom..."',
+    background: 'linear-gradient(135deg, #E9D8FD, #FED7E2, #FEFCBF)',
+    textColor: '#553C9A',
+    fontClass: 'font-display',
+  },
+];
+
+export const getTone = (id) => TONES.find(t => t.id === id) || TONES[0];

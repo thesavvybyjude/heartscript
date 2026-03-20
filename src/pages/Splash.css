@@ -1,0 +1,87 @@
+.splash-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--soft-coral), var(--rose-red));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.splash-icon-box {
+  padding: 28px;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  margin-bottom: 24px;
+}
+
+.splash-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+}
+
+.splash-subtitle {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.splash-button-area {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 48px;
+  width: 100%;
+  max-width: 320px;
+  z-index: 2;
+}
+
+.splash-cta {
+  width: 100%;
+  background: white;
+  color: var(--rose-red);
+  padding: 20px 32px;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 1.15rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.splash-cta:hover {
+  transform: scale(1.03);
+}
+
+.splash-cta:active {
+  transform: scale(0.97);
+}
+
+.splash-hearts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.splash-heart-float {
+  position: absolute;
+  bottom: 0;
+}

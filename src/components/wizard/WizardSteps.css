@@ -1,0 +1,547 @@
+/* ===== SHARED WIZARD STEP STYLES ===== */
+
+.step-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+  min-height: calc(100vh - 200px);
+}
+
+.step-header {
+  margin-bottom: 8px;
+}
+
+.step-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.step-title {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--midnight-navy);
+  font-family: var(--font-display);
+}
+
+.step-desc {
+  color: rgba(31,35,51,0.4);
+  font-size: 0.88rem;
+  margin-top: 6px;
+}
+
+.step-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.step-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== STEP 1 - TYPE CARDS ===== */
+.type-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  width: 100%;
+  padding: 24px;
+  cursor: pointer;
+}
+
+.type-card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.type-card-icon.pop {
+  background: rgba(var(--rose-red-rgb), 0.06);
+  color: var(--rose-red);
+}
+
+.type-card:hover .type-card-icon.pop {
+  background: var(--rose-red);
+  color: white;
+}
+
+.type-card-icon.custom {
+  background: rgba(31,35,51,0.05);
+  color: rgba(31,35,51,0.4);
+}
+
+.type-card:hover .type-card-icon.custom {
+  background: var(--midnight-navy);
+  color: white;
+}
+
+.type-card-text h3 {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.type-card-text p {
+  font-size: 0.82rem;
+  color: rgba(31,35,51,0.4);
+}
+
+/* ===== STEP 2 - POP QUESTION ===== */
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.question-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--midnight-navy);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.question-option:hover {
+  border-color: var(--soft-coral);
+}
+
+.question-option.selected {
+  border-color: var(--rose-red);
+  background: rgba(var(--rose-red-rgb), 0.03);
+  box-shadow: 0 0 0 4px rgba(var(--rose-red-rgb), 0.06);
+}
+
+.question-custom-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  background: rgba(var(--rose-red-rgb), 0.04);
+  border: 1.5px dashed rgba(var(--rose-red-rgb), 0.2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rose-red);
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.question-custom-btn:hover {
+  background: rgba(var(--rose-red-rgb), 0.08);
+}
+
+/* ===== STEP 2 - CUSTOM MESSAGE ===== */
+.custom-msg-area {
+  flex: 1;
+}
+
+.custom-msg-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ===== STEP 3 - TONE GRID ===== */
+.tone-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tone-card {
+  position: relative;
+  height: 120px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.tone-card.selected {
+  border-color: var(--rose-red);
+  box-shadow: 0 0 0 4px rgba(var(--rose-red-rgb), 0.15);
+}
+
+.tone-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+
+.tone-emoji {
+  font-size: 1.5rem;
+}
+
+.tone-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.tone-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  background: var(--rose-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.sticky-footer {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, var(--warm-ivory) 60%, transparent);
+  padding-top: 24px;
+  z-index: 10;
+}
+
+/* ===== STEP 4 - LOCK ===== */
+.lock-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.lock-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.lock-toggle-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.lock-toggle-icon.active {
+  background: var(--rose-red);
+  color: white;
+}
+
+.lock-toggle-icon:not(.active) {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.lock-toggle-text {
+  flex: 1;
+}
+
+.lock-toggle-text h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.lock-toggle-text p {
+  font-size: 0.78rem;
+  color: rgba(31,35,51,0.4);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.lock-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lock-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: #FFF7ED;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: #C2410C;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* ===== STEP 5 - CONFIRM ===== */
+.confirm-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.confirm-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.confirm-card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(31,35,51,0.3);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.confirm-preview {
+  padding: 32px 24px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.confirm-preview-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.confirm-preview-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.confirm-yes, .confirm-no {
+  padding: 10px 24px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: inherit;
+}
+
+.confirm-details {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.confirm-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.confirm-detail-row:last-child {
+  border-bottom: none;
+}
+
+.confirm-detail-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.confirm-footer {
+  display: flex;
+  gap: 12px;
+}
+
+.confirm-footer .btn-secondary {
+  flex: 0.4;
+}
+
+.confirm-footer .btn-primary {
+  flex: 0.6;
+}
+
+/* ===== STEP 6 - SUCCESS ===== */
+.success-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 24px 40px;
+  text-align: center;
+}
+
+.success-icon {
+  margin-bottom: 20px;
+}
+
+.success-check {
+  width: 80px;
+  height: 80px;
+  background: var(--rose-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: var(--shadow-rose);
+}
+
+.success-badge {
+  margin-bottom: 20px;
+}
+
+.success-title {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.success-desc {
+  color: rgba(31,35,51,0.4);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.success-link-box {
+  width: 100%;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.success-link {
+  flex: 1;
+  font-size: 0.78rem;
+  color: rgba(31,35,51,0.5);
+  text-align: left;
+}
+
+.success-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--rose-red);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.success-copy-btn:active {
+  transform: scale(0.95);
+}
+
+.success-share-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.success-share-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.success-share-btn.whatsapp {
+  background: #DCF8C6;
+  color: #25D366;
+}
+
+.success-share-btn.sms {
+  background: #E3F2FD;
+  color: #2196F3;
+}
+
+.success-share-btn.email {
+  background: #FFF3E0;
+  color: #FF9800;
+}
+
+.success-share-btn.share {
+  background: #F3E5F5;
+  color: #9C27B0;
+}
+
+.success-share-btn:active {
+  transform: scale(0.93);
+}
+
+.success-dash-btn {
+  margin-top: auto;
+}
