@@ -60,12 +60,12 @@ export default function ViewHeartScript() {
     }
   };
 
-  // 1. Enforce authentication on shared links
+  // Authentication is now checked during render for cleaner state transitions
   useEffect(() => {
     if (!isInitializing && !user) {
-      navigate(`/login?returnUrl=/view/${id}`);
+      // Internal redirect as fallback, but returnUrl is handled by logic below
     }
-  }, [user, isInitializing, navigate, id]);
+  }, [user, isInitializing, id]);
 
   useEffect(() => {
     if (viewState === 'reveal' && soundscape !== 'none') {
@@ -98,8 +98,14 @@ export default function ViewHeartScript() {
     );
   }
 
-  // If not logged in, we are redirecting in the useEffect, render nothing
-  if (!user) return null;
+  // If not logged in, show the loader while App.jsx or internal navigate kicks in
+  if (!user) {
+    return (
+      <div className="view-page flex-center" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Heart size={40} className="skeleton-shimmer" stroke="var(--soft-coral)" style={{ animation: 'heart-pulse 1.5s infinite' }} />
+      </div>
+    );
+  }
 
   if (!heartscript) {
     return (

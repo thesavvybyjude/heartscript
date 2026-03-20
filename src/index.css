@@ -79,9 +79,8 @@ img {
 
 /* ===== LAYOUT ===== */
 .app-shell {
-  max-width: 430px;
+  max-width: var(--max-app-width);
   margin: 0 auto;
-  width: 100%;
   min-height: 100vh;
   position: relative;
   background: var(--warm-ivory);

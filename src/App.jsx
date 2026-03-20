@@ -10,8 +10,20 @@ import Wizard from './pages/Wizard';
 import Profile from './pages/Profile';
 import ViewHeartScript from './pages/ViewHeartScript';
 import Alerts from './pages/Alerts';
+import { useLocation } from 'react-router-dom';
+
+function ProtectedRoute({ children }) {
+  const user = useStore(s => s.user);
+  const location = useLocation();
+
+  if (!user) {
+    return <Navigate to={`/login?returnUrl=${location.pathname}`} replace />;
+  }
+  return children;
+}
 
 function App() {
+  const location = useLocation();
   const initializeAuth = useStore(s => s.initializeAuth);
   const isInitializing = useStore(s => s.isInitializing);
 
@@ -31,14 +43,17 @@ function App() {
     <div className="app-shell">
       <Toaster position="bottom-center" toastOptions={{ className: 'hs-toast' }} />
       <AnimatePresence mode="wait">
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Splash />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create" element={<Wizard />} />
-          <Route path="/profile" element={<Profile />} />
+          
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute><Wizard /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/alerts" element={<ProtectedRoute><Alerts /></ProtectedRoute>} />
           <Route path="/view/:id" element={<ViewHeartScript />} />
-          <Route path="/alerts" element={<Alerts />} />
+          
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
