@@ -5,6 +5,7 @@ import { Bell, Heart, ChevronRight, MessageSquare, FileText, Clock } from 'lucid
 import useStore from '../store/useStore';
 import BottomNav from '../components/ui/BottomNav';
 import './Dashboard.css'; // Reuse dashboard styles for consistency
+import '../skeleton.css';
 
 export default function Alerts() {
   const navigate = useNavigate();

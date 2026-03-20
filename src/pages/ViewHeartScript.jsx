@@ -8,6 +8,7 @@ import SlideToOpen from '../components/ui/SlideToOpen';
 import { decryptMessage } from '../utils/crypto';
 import { playSoundscape } from '../data/soundscapes';
 import './ViewHeartScript.css';
+import '../skeleton.css';
 
 export default function ViewHeartScript() {
   const { id } = useParams();
