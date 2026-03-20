@@ -1,6 +1,7 @@
 import { Clock, Lock, ChevronRight, MessageSquare, FileText, Heart, Trash2, Search as SearchIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import useStore from '../store/useStore';
 import { supabase } from '../lib/supabase';
@@ -24,9 +25,9 @@ export default function Dashboard() {
   const isSearchVisible = heartscripts.length > 5;
 
   const filteredScripts = heartscripts.filter(h => 
-    h.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    h.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    h.tone.toLowerCase().includes(searchQuery.toLowerCase())
+    h.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    h.sender?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    h.tone?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {

@@ -28,6 +28,7 @@ export default function ViewHeartScript() {
   const [viewState, setViewState] = useState('landing'); // landing | unlock | reveal | thankyou
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loadError, setLoadError] = useState(false);
 
   const requestFullScreen = () => {
     try {
@@ -83,9 +84,16 @@ export default function ViewHeartScript() {
 
   useEffect(() => {
     async function load() {
-      const data = await fetchHeartScript(id);
-      setHeartscript(data);
-      setIsFetching(false);
+      try {
+        const data = await fetchHeartScript(id);
+        if (!data) setLoadError(true);
+        setHeartscript(data);
+      } catch (err) {
+        console.error("Fetch error", err);
+        setLoadError(true);
+      } finally {
+        setIsFetching(false);
+      }
     }
     load();
   }, [id, fetchHeartScript]);
@@ -107,12 +115,12 @@ export default function ViewHeartScript() {
     );
   }
 
-  if (!heartscript) {
+  if (!heartscript || loadError) {
     return (
       <div className="view-page" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40, textAlign: 'center' }}>
         <div className="card" style={{ maxWidth: 300 }}>
           <h2 style={{ marginBottom: 8 }}>Message not found</h2>
-          <p className="text-muted text-sm">The link might be broken or expired.</p>
+          <p className="text-muted text-sm">The link might be broken, expired, or you don't have permission to view it.</p>
           <button className="btn-primary" style={{ marginTop: 20 }} onClick={() => navigate('/')}>
             Go Home
           </button>
